@@ -9,7 +9,11 @@ It's an MVP, not a finished product. Auth isn't built yet (see "Known
 limitations" below), but the core flow works end to end and I tested every
 endpoint by hand before calling it done.
 
+App: https://maintenance-tracker-seven.vercel.app/
+API docs: https://maintenance-tracker-api-gp0o.onrender.com/docs
+
 ## Stack
+
 - React (Vite) — no CDN shortcuts, real build tooling
 - FastAPI
 - PostgreSQL in production, SQLite locally (same code, switches automatically
@@ -34,6 +38,7 @@ Felt like the more honest tradeoff for something I wanted working reliably
 tonight.
 
 ## Project structure
+
 ```
 maintenance-tracker/
   frontend/           React (Vite)
@@ -48,6 +53,7 @@ maintenance-tracker/
 ## Running it locally
 
 **Backend**
+
 ```powershell
 cd backend
 python -m venv venv
@@ -55,6 +61,7 @@ venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
 ```
+
 (Mac/Linux: `python3 -m venv venv` and `source venv/bin/activate`.)
 
 No database setup needed — without `DATABASE_URL` set it just uses a local
@@ -62,17 +69,21 @@ SQLite file. Swagger docs are at http://localhost:8000/docs if you want to
 poke at the API directly.
 
 **Frontend** — separate terminal
+
 ```powershell
 cd frontend
 npm install
 npm run dev
 ```
+
 http://localhost:5173
 
 **If you want the real AI suggestion instead of keyword matching:**
+
 ```powershell
 $env:ANTHROPIC_API_KEY="sk-ant-..."
 ```
+
 set before starting uvicorn. Totally optional — the app works fine without it.
 
 ## Deployment
@@ -83,10 +94,12 @@ Frontend goes on Vercel — set Root Directory to `frontend`, add a
 `VITE_API_BASE` env var pointing at the Render URL.
 
 ## Live links
+
 - App: (add once deployed)
 - API docs: (add `/docs` to the Render URL once deployed)
 
 ## Known limitations
+
 - No login/auth — anyone can currently see the admin dashboard
 - No email notifications when a status changes
 - Category suggestion is keyword-based unless an API key is configured
